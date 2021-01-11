@@ -3,9 +3,9 @@ import { fetchQuizQuestions } from './API';
 // Components
 import QuestionCard from './components/QuestionCard';
 // types
-import { QuestionState, Difficulty } from './API';
+import { QuestionsState, Difficulty } from './API';
 // Styles
-//import { GlobalStyle, Wrapper } from './App.styles';
+import { GlobalStyle, Wrapper } from './App.styles';
 
 export type AnswerObject = {
   question: string;
@@ -18,7 +18,7 @@ const TOTAL_QUESTIONS = 10;
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(false);
-  const [questions, setQuestions] = useState<QuestionState[]>([]);
+  const [questions, setQuestions] = useState<QuestionsState[]>([]);
   const [number, setNumber] = useState(0);
   const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
   const [score, setScore] = useState(0);
@@ -70,8 +70,8 @@ const App: React.FC = () => {
 
   return (
     <>
-      {/* <GlobalStyle /> */}
-      {/* <Wrapper> */}
+      <GlobalStyle />
+      <Wrapper>
         <h1>REACT QUIZ</h1>
         {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
           <button className='start' onClick={startTrivia}>
@@ -82,7 +82,7 @@ const App: React.FC = () => {
         {loading ? <p>Loading Questions...</p> : null}
         {!loading && !gameOver && (
           <QuestionCard
-            questionNumber={number + 1}
+            questionNr={number + 1}
             totalQuestions={TOTAL_QUESTIONS}
             question={questions[number].question}
             answers={questions[number].answers}
@@ -95,7 +95,7 @@ const App: React.FC = () => {
             Next Question
           </button>
         ) : null}
-      {/* </Wrapper> */}
+      </Wrapper>
     </>
   );
 };
